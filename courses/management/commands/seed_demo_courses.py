@@ -6,15 +6,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         demo_courses = [
-            {'name': 'Python Basics', 'description': 'Learn Python from scratch.'},
-            {'name': 'Web Development', 'description': 'Build websites with Django.'},
-            {'name': 'Data Science', 'description': 'Intro to data analysis and ML.'},
-            {'name': 'JavaScript Essentials', 'description': 'JS for beginners.'},
-            {'name': 'Database Design', 'description': 'Learn SQL and DB modeling.'},
+            {'name': 'Python Basics', 'code': 'PY101'},
+            {'name': 'Web Development', 'code': 'WD201'},
+            {'name': 'Data Science', 'code': 'DS301'},
+            {'name': 'JavaScript Essentials', 'code': 'JS102'},
+            {'name': 'Database Design', 'code': 'DB202'},
         ]
         created = 0
         for course in demo_courses:
-            obj, was_created = Course.objects.get_or_create(name=course['name'], defaults={'description': course['description']})
+            obj, was_created = Course.objects.get_or_create(name=course['name'], code=course['code'])
             if was_created:
                 created += 1
         self.stdout.write(self.style.SUCCESS(f'{created} demo courses added.'))
