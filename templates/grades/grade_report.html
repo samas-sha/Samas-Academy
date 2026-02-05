@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Grade Report - {{ student.full_name }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+        <h2 class="mb-0"><i class="bi bi-award me-2"></i>Grade Report</h2>
+        <a href="{% url 'student_detail' student.pk %}" class="btn btn-outline-primary"><i class="bi bi-arrow-left me-1"></i>Back to Student</a>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <h5>{{ student.full_name }}</h5>
+            <p class="text-muted mb-0">Roll No: {{ student.roll_number }} | {{ student.department.name|default:"No Department" }}</p>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            {% if enrollments %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Code</th>
+                            <th>Grade</th>
+                            <th>Marks</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enr in enrollments %}
+                        <tr>
+                            <td>{{ enr.course.name }}</td>
+                            <td>{{ enr.course.code }}</td>
+                            <td>{% if enr.grade %}{{ enr.grade.grade_value|default:"—" }}{% else %}—{% endif %}</td>
+                            <td>{% if enr.grade %}{{ enr.grade.marks|default:"—" }}{% else %}—{% endif %}</td>
+                            <td>{% if enr.grade %}{{ enr.grade.remarks|default:"—" }}{% else %}—{% endif %}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted mb-0">No enrollments. <a href="{% url 'enrollment_create' %}">Enroll in a course</a>.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
