@@ -13,7 +13,7 @@
 
     <div class="card border-0 shadow-sm">
         <div class="card-body">
-            {% if courses %}
+            <p class="text-info">[DEBUG] Number of courses found: {{ courses|length }}</p>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -45,11 +45,20 @@
                             </td>
                         </tr>
                         {% endfor %}
+                        <!-- Hardcoded demo course row for testing -->
+                        <tr style="background: #ffe4e1;">
+                            <td>DEMO101</td>
+                            <td>Demo Course (Hardcoded)</td>
+                            <td>Demo Dept</td>
+                            <td>Demo Teacher</td>
+                            <td>0</td>
+                            <td><span class="badge bg-secondary">Demo</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            {% else %}
-            <p class="text-muted mb-0">No courses yet. {% if user.profile.is_admin %}<a href="{% url 'course_create' %}">Add one</a>.{% endif %}</p>
+            {% if courses|length == 0 %}
+            <p class="text-danger fw-bold">No courses in the database. This is a hardcoded demo row for debugging. If you see only this, seeding/database is not working.</p>
             {% endif %}
         </div>
     </div>
