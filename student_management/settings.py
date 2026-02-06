@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-&c%oy3+q50m*!+jdo#7ceza5(csbr1ev$r*9k&*cw)cghm*a+r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'samas-academy.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'samas-academy.onrender.com', 'learning-platform-0xyr.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
