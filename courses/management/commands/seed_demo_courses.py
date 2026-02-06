@@ -14,7 +14,11 @@ class Command(BaseCommand):
         ]
         created = 0
         for course in demo_courses:
+            self.stdout.write(f'Processing course: {course}')
             obj, was_created = Course.objects.get_or_create(name=course['name'], code=course['code'])
             if was_created:
+                self.stdout.write(self.style.SUCCESS(f'Created: {course["name"]} ({course["code"]})'))
                 created += 1
+            else:
+                self.stdout.write(self.style.WARNING(f'Already exists: {course["name"]} ({course["code"]})'))
         self.stdout.write(self.style.SUCCESS(f'{created} demo courses added.'))
